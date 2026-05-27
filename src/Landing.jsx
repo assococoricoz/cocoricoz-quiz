@@ -8,10 +8,12 @@ export default function Landing({ onHost, onPlay }) {
       justifyContent: 'center',
       padding: '24px',
       minHeight: '100vh',
+      overflow: 'hidden',
+      position: 'relative',
     }}>
       {/* Decorative circles */}
       <div style={{
-        position: 'absolute', top: -60, right: -60,
+        position: "absolute", top: -60, right: -60, overflow: "hidden",
         width: 200, height: 200, borderRadius: '50%',
         background: 'rgba(255,255,255,0.05)', pointerEvents: 'none'
       }} />

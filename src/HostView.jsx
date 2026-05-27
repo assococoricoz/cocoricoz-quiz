@@ -191,28 +191,28 @@ function FinalPodium({ players, onBack }) {
 
         {/* Podium */}
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
-          gap: 8, marginBottom: 32, marginTop: 16 }}>
+          gap: 6, marginBottom: 32, marginTop: 16 }}>
           {[podiumOrder[0], podiumOrder[1], podiumOrder[2]].map((player, col) => {
-            if (!player) return <div key={col} style={{ width: 140 }} />;
+            if (!player) return <div key={col} style={{ flex: 1, maxWidth: 150 }} />;
             const h = podiumHeights[col];
             const color = podiumColors[col];
             const label = podiumLabels[col];
             return (
-              <div key={col} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 150 }}>
+              <div key={col} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, maxWidth: 160, minWidth: 0 }}>
                 {/* Player card above podium */}
                 <div style={{
-                  textAlign: 'center', marginBottom: 8,
+                  textAlign: 'center', marginBottom: 8, width: '100%',
                   animation: `playerDrop 0.6s ${0.5 + col * 0.2}s ease both`,
                 }}>
-                  <div style={{ fontSize: col === 1 ? '2.5rem' : '1.8rem' }}>{label}</div>
+                  <div style={{ fontSize: col === 1 ? '2rem' : '1.5rem' }}>{label}</div>
                   <div style={{
-                    color: 'white', fontWeight: 900, fontSize: col === 1 ? '1rem' : '0.85rem',
-                    background: 'rgba(255,255,255,0.1)', borderRadius: 8, padding: '6px 10px',
-                    maxWidth: 140, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                    color: 'white', fontWeight: 900, fontSize: col === 1 ? '0.9rem' : '0.78rem',
+                    background: 'rgba(255,255,255,0.1)', borderRadius: 8, padding: '5px 8px',
+                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                   }}>
                     {player.name}
                   </div>
-                  <div style={{ color: color, fontWeight: 900, fontSize: '0.9rem', marginTop: 2 }}>
+                  <div style={{ color: color, fontWeight: 900, fontSize: '0.85rem', marginTop: 2 }}>
                     {player.score} pts
                   </div>
                 </div>
@@ -224,7 +224,7 @@ function FinalPodium({ players, onBack }) {
                   transformOrigin: 'bottom',
                   animation: `podiumRise 0.8s ${col * 0.15}s cubic-bezier(0.34,1.56,0.64,1) both`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '1.8rem', fontWeight: 900, color: 'white',
+                  fontSize: '1.5rem', fontWeight: 900, color: 'white',
                 }}>
                   {[2, 1, 3][col]}
                 </div>
@@ -445,7 +445,7 @@ export default function HostView({ onBack }) {
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.2rem,3vw,1.7rem)', color: 'white', lineHeight: 1.3, flex: 1, margin: 0 }}>{question.question}</h2>
           <TimerRing timeLeft={timeLeft} total={QUESTION_TIME} />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10, marginBottom: 20 }}>
           {question.options.map((opt, i) => (
             <div key={i} style={{ background: OPTION_COLORS[i], borderRadius: 12, padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
               <div style={{ width: 30, height: 30, borderRadius: '50%', background: 'rgba(255,255,255,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, color: 'white', fontSize: '0.85rem', flexShrink: 0 }}>{OPTION_LABELS[i]}</div>
