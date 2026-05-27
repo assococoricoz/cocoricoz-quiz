@@ -1,29 +1,40 @@
 export const QUESTION_TIME = 20;
 
 export const QUESTIONS = [
-  { id: 0, category: "🥐 Gastronomie", question: "Quel est le fromage français le plus célèbre dans le monde ?", options: ["Comté", "Brie", "Roquefort", "Mimolette"], correct: 1 },
-  { id: 1, category: "🥐 Gastronomie", question: "Combien de croissants la France produit-elle environ par jour ?", options: ["100 000", "1 million", "6 millions", "20 millions"], correct: 2 },
-  { id: 2, category: "🥐 Gastronomie", question: "Quel plat est originaire de la région de Bourgogne ?", options: ["La raclette", "La bouillabaisse", "Le cassoulet", "Le bœuf bourguignon"], correct: 3 },
-  { id: 3, category: "🥐 Gastronomie", question: "La baguette française a été inscrite au patrimoine de l'UNESCO en quelle année ?", options: ["2010", "2018", "2022", "2024"], correct: 2 },
-  { id: 4, category: "🥐 Gastronomie", question: "Qu'est-ce qu'une « religieuse » en France ?", options: ["Une sœur catholique", "Un gâteau à la crème", "Une chanson populaire", "Une fête traditionnelle"], correct: 1 },
-  { id: 5, category: "🗺️ Géographie", question: "Quelle est la capitale de la France ?", options: ["Lyon", "Marseille", "Paris", "Nice"], correct: 2 },
-  { id: 6, category: "🗺️ Géographie", question: "Combien de pays partagent une frontière terrestre avec la France ?", options: ["4", "5", "8", "10"], correct: 2 },
-  { id: 7, category: "🗺️ Géographie", question: "Quel est le plus long fleuve de France ?", options: ["La Seine", "Le Rhône", "La Loire", "La Garonne"], correct: 2 },
-  { id: 8, category: "🗺️ Géographie", question: "Dans quelle ville se trouve la cathédrale Notre-Dame ?", options: ["Lyon", "Strasbourg", "Paris", "Reims"], correct: 2 },
-  { id: 9, category: "🗺️ Géographie", question: "Quel département français se trouve en Amérique du Sud ?", options: ["La Réunion", "La Martinique", "La Guyane", "Mayotte"], correct: 2 },
-  { id: 10, category: "🎬 Culture pop", question: "Quel dessin animé français met en scène un petit gaulois irréductible ?", options: ["Tintin", "Lucky Luke", "Astérix", "Iznogoud"], correct: 2 },
-  { id: 11, category: "🎬 Culture pop", question: "Qui a chanté « La Vie en Rose » ?", options: ["Juliette Gréco", "Barbara", "Édith Piaf", "Dalida"], correct: 2 },
-  { id: 12, category: "🎬 Culture pop", question: "Dans quel film un rat cuisine-t-il dans un restaurant parisien ?", options: ["Le Festin de Babette", "Ratatouille", "Le Dîner de Cons", "Amélie"], correct: 1 },
-  { id: 13, category: "🎬 Culture pop", question: "Comment s'appelle la protagoniste du film « Le Fabuleux Destin d'Amélie Poulain » ?", options: ["Clémentine", "Juliette", "Amélie", "Camille"], correct: 2 },
-  { id: 14, category: "🎬 Culture pop", question: "Quelle chanteuse française est connue pour la chanson « Je veux » ?", options: ["Stromae", "Mc Solaar", "Zaz", "Louane"], correct: 2 },
-  { id: 15, category: "🏛️ Histoire", question: "En quelle année la Révolution française a-t-elle eu lieu ?", options: ["1776", "1789", "1804", "1815"], correct: 1 },
-  { id: 16, category: "🏛️ Histoire", question: "Qui était Napoléon Bonaparte ?", options: ["Un roi de France", "Un philosophe", "Un général et empereur", "Un explorateur"], correct: 2 },
-  { id: 17, category: "🏛️ Histoire", question: "Quel monument parisien a été construit pour l'Exposition Universelle de 1889 ?", options: ["Le Louvre", "L'Arc de Triomphe", "La Tour Eiffel", "Le Sacré-Cœur"], correct: 2 },
-  { id: 18, category: "🏛️ Histoire", question: "Quelle femme française a été la première à recevoir un Prix Nobel ?", options: ["Simone de Beauvoir", "Simone Veil", "Marie Curie", "Colette"], correct: 2 },
-  { id: 19, category: "🦘 France & Australie", question: "Dans quelle ville australienne y a-t-il le plus grand nombre de francophones ?", options: ["Brisbane", "Sydney", "Melbourne", "Perth"], correct: 2 },
-  { id: 20, category: "🦘 France & Australie", question: "Quel territoire français se trouve dans le Pacifique, proche de l'Australie ?", options: ["La Réunion", "La Nouvelle-Calédonie", "Saint-Pierre-et-Miquelon", "La Polynésie"], correct: 1 },
-  { id: 21, category: "🦘 France & Australie", question: "Quel explorateur français a cartographié les côtes australiennes au début du XIXe siècle ?", options: ["La Pérouse", "Nicolas Baudin", "Bougainville", "Dumont d'Urville"], correct: 1 },
-  { id: 22, category: "🦘 France & Australie", question: "Comment s'écrit correctement « kangourou » en français ?", options: ["Kanguru", "Kangouru", "Kangourou", "Cangorou"], correct: 2 },
-  { id: 23, category: "🔤 Langue française", question: "Combien de lettres compte l'alphabet français ?", options: ["23", "25", "26", "28"], correct: 2 },
-  { id: 24, category: "🔤 Langue française", question: "Que signifie l'expression « avoir le cafard » ?", options: ["Avoir peur des insectes", "Avoir faim", "Se sentir triste", "Être en retard"], correct: 2 }
+  // 🥐 Food & Gastronomy
+  { id: 0, category: "🥐 Food & Gastronomy", question: "Which French cheese is the most famous in the world?", options: ["Comté", "Brie", "Roquefort", "Mimolette"], correct: 1 },
+  { id: 1, category: "🥐 Food & Gastronomy", question: "How many croissants does France produce approximately per day?", options: ["100,000", "1 million", "6 million", "20 million"], correct: 2 },
+  { id: 2, category: "🥐 Food & Gastronomy", question: "Which dish originates from the Burgundy region of France?", options: ["Raclette", "Bouillabaisse", "Cassoulet", "Beef Bourguignon"], correct: 3 },
+  { id: 3, category: "🥐 Food & Gastronomy", question: "In what year was the French baguette inscribed on UNESCO's heritage list?", options: ["2010", "2018", "2022", "2024"], correct: 2 },
+  { id: 4, category: "🥐 Food & Gastronomy", question: "What is a \"religieuse\" in France?", options: ["A Catholic nun", "A cream-filled pastry", "A popular song", "A traditional festival"], correct: 1 },
+
+  // 🗺️ Geography
+  { id: 5, category: "🗺️ Geography", question: "What is the capital of France?", options: ["Lyon", "Marseille", "Paris", "Nice"], correct: 2 },
+  { id: 6, category: "🗺️ Geography", question: "How many countries share a land border with France?", options: ["4", "5", "8", "10"], correct: 2 },
+  { id: 7, category: "🗺️ Geography", question: "What is the longest river in France?", options: ["The Seine", "The Rhône", "The Loire", "The Garonne"], correct: 2 },
+  { id: 8, category: "🗺️ Geography", question: "In which city is the Notre-Dame Cathedral located?", options: ["Lyon", "Strasbourg", "Paris", "Reims"], correct: 2 },
+  { id: 9, category: "🗺️ Geography", question: "Which French overseas territory is located in South America?", options: ["Réunion", "Martinique", "French Guiana", "Mayotte"], correct: 2 },
+
+  // 🎬 Pop Culture
+  { id: 10, category: "🎬 Pop Culture", question: "Which French cartoon features a stubborn little Gaul warrior?", options: ["Tintin", "Lucky Luke", "Asterix", "Iznogoud"], correct: 2 },
+  { id: 11, category: "🎬 Pop Culture", question: "Who sang \"La Vie en Rose\"?", options: ["Juliette Gréco", "Barbara", "Édith Piaf", "Dalida"], correct: 2 },
+  { id: 12, category: "🎬 Pop Culture", question: "In which movie does a rat cook in a Parisian restaurant?", options: ["Babette's Feast", "Ratatouille", "The Dinner Game", "Amélie"], correct: 1 },
+  { id: 13, category: "🎬 Pop Culture", question: "What is the name of the main character in \"Amélie\"?", options: ["Clémentine", "Juliette", "Amélie", "Camille"], correct: 2 },
+  { id: 14, category: "🎬 Pop Culture", question: "Which French singer is known for the song \"Je veux\"?", options: ["Stromae", "Mc Solaar", "Zaz", "Louane"], correct: 2 },
+
+  // 🏛️ History
+  { id: 15, category: "🏛️ History", question: "In what year did the French Revolution take place?", options: ["1776", "1789", "1804", "1815"], correct: 1 },
+  { id: 16, category: "🏛️ History", question: "Who was Napoléon Bonaparte?", options: ["A King of France", "A philosopher", "A general and emperor", "An explorer"], correct: 2 },
+  { id: 17, category: "🏛️ History", question: "Which Parisian monument was built for the 1889 World's Fair?", options: ["The Louvre", "The Arc de Triomphe", "The Eiffel Tower", "The Sacré-Cœur"], correct: 2 },
+  { id: 18, category: "🏛️ History", question: "Which French woman was the first to receive a Nobel Prize?", options: ["Simone de Beauvoir", "Simone Veil", "Marie Curie", "Colette"], correct: 2 },
+
+  // 🦘 France & Australia
+  { id: 19, category: "🦘 France & Australia", question: "Which Australian city has the largest French-speaking community?", options: ["Brisbane", "Sydney", "Melbourne", "Perth"], correct: 2 },
+  { id: 20, category: "🦘 France & Australia", question: "Which French territory is located in the Pacific, close to Australia?", options: ["Réunion", "New Caledonia", "Saint-Pierre-et-Miquelon", "French Polynesia"], correct: 1 },
+  { id: 21, category: "🦘 France & Australia", question: "Which French explorer mapped the Australian coastline in the early 19th century?", options: ["La Pérouse", "Nicolas Baudin", "Bougainville", "Dumont d'Urville"], correct: 1 },
+  { id: 22, category: "🦘 France & Australia", question: "How many states and territories does Australia have in total?", options: ["4", "6", "8", "10"], correct: 2 },
+
+  // 🔤 French Language
+  { id: 23, category: "🔤 French Language", question: "How many letters are in the French alphabet?", options: ["23", "25", "26", "28"], correct: 2 },
+  { id: 24, category: "🔤 French Language", question: "What does the French expression \"avoir le cafard\" mean?", options: ["To be scared of insects", "To be hungry", "To feel sad", "To be late"], correct: 2 }
 ];
