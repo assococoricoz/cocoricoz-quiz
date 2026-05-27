@@ -1,38 +1,29 @@
+export const QUESTION_TIME = 20;
+
 export const QUESTIONS = [
-  // 🥐 GASTRONOMIE
-  { category: "🥐 Gastronomie", q: "Quel est le fromage français le plus célèbre dans le monde ?", choices: ["Comté", "Brie", "Roquefort", "Mimolette"], answer: 1 },
-  { category: "🥐 Gastronomie", q: "Combien de baguettes la France produit-elle environ par jour ?", choices: ["1 million", "6 millions", "12 millions", "20 millions"], answer: 1 },
-  { category: "🥐 Gastronomie", q: "Quel plat est originaire de la région de Bourgogne ?", choices: ["La raclette", "La bouillabaisse", "Le cassoulet", "Le bœuf bourguignon"], answer: 3 },
-  { category: "🥐 Gastronomie", q: "La baguette française a été inscrite au patrimoine de l'UNESCO en quelle année ?", choices: ["2010", "2018", "2022", "2024"], answer: 2 },
-  { category: "🥐 Gastronomie", q: "Qu'est-ce qu'une « religieuse » en pâtisserie française ?", choices: ["Une brioche au beurre", "Un gâteau à la crème à deux choux", "Un biscuit aux noisettes", "Une tarte aux fruits rouges"], answer: 1 },
-
-  // 🗺️ GÉOGRAPHIE
-  { category: "🗺️ Géographie", q: "Quel est le plus long fleuve de France ?", choices: ["La Seine", "Le Rhône", "La Loire", "La Garonne"], answer: 2 },
-  { category: "🗺️ Géographie", q: "Combien de pays partagent une frontière terrestre avec la France ?", choices: ["5", "6", "8", "10"], answer: 2 },
-  { category: "🗺️ Géographie", q: "Quel département français se trouve en Amérique du Sud ?", choices: ["La Réunion", "La Martinique", "La Guyane", "Mayotte"], answer: 2 },
-  { category: "🗺️ Géographie", q: "Dans quelle ville française se trouve la cathédrale Notre-Dame ?", choices: ["Lyon", "Strasbourg", "Paris", "Reims"], answer: 2 },
-  { category: "🗺️ Géographie", q: "Quel territoire français se trouve dans le Pacifique, proche de l'Australie ?", choices: ["La Réunion", "La Nouvelle-Calédonie", "Saint-Pierre-et-Miquelon", "La Polynésie française"], answer: 1 },
-
-  // 🎬 CULTURE POP
-  { category: "🎬 Culture pop", q: "Quel dessin animé français met en scène un petit Gaulois irréductible ?", choices: ["Tintin", "Lucky Luke", "Astérix", "Iznogoud"], answer: 2 },
-  { category: "🎬 Culture pop", q: "Qui a chanté « La Vie en Rose » ?", choices: ["Juliette Gréco", "Barbara", "Édith Piaf", "Dalida"], answer: 2 },
-  { category: "🎬 Culture pop", q: "Dans quel film un rat cuisine-t-il dans un restaurant parisien ?", choices: ["Le Festin de Babette", "Ratatouille", "Le Dîner de Cons", "Amélie Poulain"], answer: 1 },
-  { category: "🎬 Culture pop", q: "Comment s'appelle le personnage principal du film « Le Fabuleux Destin d'Amélie Poulain » ?", choices: ["Clémentine", "Juliette", "Amélie", "Camille"], answer: 2 },
-  { category: "🎬 Culture pop", q: "Quel chanteur belge francophone est connu pour « Formidable » et « Papaoutai » ?", choices: ["Zaz", "Mc Solaar", "Stromae", "Louane"], answer: 2 },
-
-  // 🏛️ HISTOIRE
-  { category: "🏛️ Histoire", q: "En quelle année la Révolution française a-t-elle eu lieu ?", choices: ["1776", "1789", "1804", "1815"], answer: 1 },
-  { category: "🏛️ Histoire", q: "Quel monument parisien a été construit pour l'Exposition Universelle de 1889 ?", choices: ["Le Louvre", "L'Arc de Triomphe", "La Tour Eiffel", "Le Sacré-Cœur"], answer: 2 },
-  { category: "🏛️ Histoire", q: "Quelle femme française a été la première à recevoir un Prix Nobel ?", choices: ["Simone de Beauvoir", "Simone Veil", "Marie Curie", "Colette"], answer: 2 },
-  { category: "🏛️ Histoire", q: "Quel explorateur français a cartographié les côtes australiennes au début du XIXe siècle ?", choices: ["La Pérouse", "Nicolas Baudin", "Bougainville", "Dumont d'Urville"], answer: 1 },
-
-  // 🦘 FRANCE & AUSTRALIE
-  { category: "🦘 France & Australie", q: "Dans quelle ville australienne trouve-t-on la plus grande communauté francophone ?", choices: ["Brisbane", "Sydney", "Melbourne", "Perth"], answer: 2 },
-  { category: "🦘 France & Australie", q: "Comment écrit-on correctement cet animal en français ?", choices: ["Kanguru", "Kangouru", "Kangourou", "Cangorou"], answer: 2 },
-  { category: "🦘 France & Australie", q: "Quel est le surnom populaire de l'Australie en français ?", choices: ["Le Grand Sud", "Le Pays des Kangourous", "Oz", "L'île-continent"], answer: 2 },
-  { category: "🦘 France & Australie", q: "En quelle année la France et l'Australie ont-elles rompu les négociations du contrat de sous-marins ?", choices: ["2019", "2020", "2021", "2022"], answer: 2 },
-
-  // 🔤 LANGUE FRANÇAISE
-  { category: "🔤 Langue française", q: "Que signifie l'expression « avoir le cafard » ?", choices: ["Avoir peur des insectes", "Avoir très faim", "Se sentir triste", "Être en retard"], answer: 2 },
-  { category: "🔤 Langue française", q: "Quel mot français a été adopté en anglais australien pour désigner un repas en plein air ?", choices: ["Déjeuner", "Pique-nique", "Buffet", "Apéro"], answer: 1 },
-]
+  { id: 0, category: "🥐 Gastronomie", question: "Quel est le fromage français le plus célèbre dans le monde ?", options: ["Comté", "Brie", "Roquefort", "Mimolette"], correct: 1 },
+  { id: 1, category: "🥐 Gastronomie", question: "Combien de croissants la France produit-elle environ par jour ?", options: ["100 000", "1 million", "6 millions", "20 millions"], correct: 2 },
+  { id: 2, category: "🥐 Gastronomie", question: "Quel plat est originaire de la région de Bourgogne ?", options: ["La raclette", "La bouillabaisse", "Le cassoulet", "Le bœuf bourguignon"], correct: 3 },
+  { id: 3, category: "🥐 Gastronomie", question: "La baguette française a été inscrite au patrimoine de l'UNESCO en quelle année ?", options: ["2010", "2018", "2022", "2024"], correct: 2 },
+  { id: 4, category: "🥐 Gastronomie", question: "Qu'est-ce qu'une « religieuse » en France ?", options: ["Une sœur catholique", "Un gâteau à la crème", "Une chanson populaire", "Une fête traditionnelle"], correct: 1 },
+  { id: 5, category: "🗺️ Géographie", question: "Quelle est la capitale de la France ?", options: ["Lyon", "Marseille", "Paris", "Nice"], correct: 2 },
+  { id: 6, category: "🗺️ Géographie", question: "Combien de pays partagent une frontière terrestre avec la France ?", options: ["4", "5", "8", "10"], correct: 2 },
+  { id: 7, category: "🗺️ Géographie", question: "Quel est le plus long fleuve de France ?", options: ["La Seine", "Le Rhône", "La Loire", "La Garonne"], correct: 2 },
+  { id: 8, category: "🗺️ Géographie", question: "Dans quelle ville se trouve la cathédrale Notre-Dame ?", options: ["Lyon", "Strasbourg", "Paris", "Reims"], correct: 2 },
+  { id: 9, category: "🗺️ Géographie", question: "Quel département français se trouve en Amérique du Sud ?", options: ["La Réunion", "La Martinique", "La Guyane", "Mayotte"], correct: 2 },
+  { id: 10, category: "🎬 Culture pop", question: "Quel dessin animé français met en scène un petit gaulois irréductible ?", options: ["Tintin", "Lucky Luke", "Astérix", "Iznogoud"], correct: 2 },
+  { id: 11, category: "🎬 Culture pop", question: "Qui a chanté « La Vie en Rose » ?", options: ["Juliette Gréco", "Barbara", "Édith Piaf", "Dalida"], correct: 2 },
+  { id: 12, category: "🎬 Culture pop", question: "Dans quel film un rat cuisine-t-il dans un restaurant parisien ?", options: ["Le Festin de Babette", "Ratatouille", "Le Dîner de Cons", "Amélie"], correct: 1 },
+  { id: 13, category: "🎬 Culture pop", question: "Comment s'appelle la protagoniste du film « Le Fabuleux Destin d'Amélie Poulain » ?", options: ["Clémentine", "Juliette", "Amélie", "Camille"], correct: 2 },
+  { id: 14, category: "🎬 Culture pop", question: "Quelle chanteuse française est connue pour la chanson « Je veux » ?", options: ["Stromae", "Mc Solaar", "Zaz", "Louane"], correct: 2 },
+  { id: 15, category: "🏛️ Histoire", question: "En quelle année la Révolution française a-t-elle eu lieu ?", options: ["1776", "1789", "1804", "1815"], correct: 1 },
+  { id: 16, category: "🏛️ Histoire", question: "Qui était Napoléon Bonaparte ?", options: ["Un roi de France", "Un philosophe", "Un général et empereur", "Un explorateur"], correct: 2 },
+  { id: 17, category: "🏛️ Histoire", question: "Quel monument parisien a été construit pour l'Exposition Universelle de 1889 ?", options: ["Le Louvre", "L'Arc de Triomphe", "La Tour Eiffel", "Le Sacré-Cœur"], correct: 2 },
+  { id: 18, category: "🏛️ Histoire", question: "Quelle femme française a été la première à recevoir un Prix Nobel ?", options: ["Simone de Beauvoir", "Simone Veil", "Marie Curie", "Colette"], correct: 2 },
+  { id: 19, category: "🦘 France & Australie", question: "Dans quelle ville australienne y a-t-il le plus grand nombre de francophones ?", options: ["Brisbane", "Sydney", "Melbourne", "Perth"], correct: 2 },
+  { id: 20, category: "🦘 France & Australie", question: "Quel territoire français se trouve dans le Pacifique, proche de l'Australie ?", options: ["La Réunion", "La Nouvelle-Calédonie", "Saint-Pierre-et-Miquelon", "La Polynésie"], correct: 1 },
+  { id: 21, category: "🦘 France & Australie", question: "Quel explorateur français a cartographié les côtes australiennes au début du XIXe siècle ?", options: ["La Pérouse", "Nicolas Baudin", "Bougainville", "Dumont d'Urville"], correct: 1 },
+  { id: 22, category: "🦘 France & Australie", question: "Comment s'écrit correctement « kangourou » en français ?", options: ["Kanguru", "Kangouru", "Kangourou", "Cangorou"], correct: 2 },
+  { id: 23, category: "🔤 Langue française", question: "Combien de lettres compte l'alphabet français ?", options: ["23", "25", "26", "28"], correct: 2 },
+  { id: 24, category: "🔤 Langue française", question: "Que signifie l'expression « avoir le cafard » ?", options: ["Avoir peur des insectes", "Avoir faim", "Se sentir triste", "Être en retard"], correct: 2 }
+];
