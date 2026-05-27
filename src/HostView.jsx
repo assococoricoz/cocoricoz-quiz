@@ -4,7 +4,7 @@ import {
   generateCode, generateId, createSession, listenToSession,
   startQuestion, revealAnswer, showLeaderboard, nextQuestion, finishGame
 } from './firebase.js';
-import { QUESTIONS, QUESTION_TIME } from './questions.js';
+import { QUESTION_TIME } from './questions.js';
 
 const OPTION_LABELS = ['A', 'B', 'C', 'D'];
 const OPTION_COLORS = ['#3B82F6', '#F59E0B', '#22C55E', '#EF4444'];
@@ -278,7 +278,7 @@ function FinalPodium({ players, onBack }) {
 }
 
 // ─── Main HostView ─────────────────────────────────────────────
-export default function HostView({ onBack }) {
+export default function HostView({ onBack, questions: QUESTIONS }) {
   const [phase, setPhase] = useState('creating');
   const [code, setCode] = useState('');
   const [session, setSession] = useState(null);
