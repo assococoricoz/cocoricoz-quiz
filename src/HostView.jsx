@@ -30,7 +30,7 @@ function TimerRing({ timeLeft, total }) {
 }
 
 // ─── Leaderboard with rank changes ───────────────────────────
-function Leaderboard({ players, prevRanks, questionIndex, isLast, onNext }) {
+function Leaderboard({ players, prevRanks, questionIndex, isLast, onNext, totalQuestions }) {
   const sorted = Object.entries(players || {})
     .map(([id, p]) => ({ id, ...p }))
     .sort((a, b) => b.score - a.score);
@@ -46,7 +46,7 @@ function Leaderboard({ players, prevRanks, questionIndex, isLast, onNext }) {
           Classement
         </h2>
         <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem', marginTop: 4 }}>
-          Question {questionIndex + 1} / {QUESTIONS.length}
+          Question {questionIndex + 1} / {totalQuestions}
         </p>
       </div>
 
@@ -532,6 +532,7 @@ export default function HostView({ onBack, questions: QUESTIONS }) {
         questionIndex={currentQ}
         isLast={currentQ >= QUESTIONS.length - 1}
         onNext={handleNext}
+        totalQuestions={QUESTIONS.length}
       />
     </div>
   );
