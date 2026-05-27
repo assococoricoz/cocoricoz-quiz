@@ -421,64 +421,69 @@ export default function PlayerView({ onBack }) {
   if (phase === 'reveal' && lastResult) {
     const currentQ = session?.currentQuestion ?? 0;
     const question = QUESTIONS[currentQ];
-    const { correct, points, totalScore, correctAnswer, selectedAnswer: sa } = lastResult;
+    const { correct, points, totalScore, correctAnswer } = lastResult;
+
+    // Compute speed tier for display
+    const speedRatio = points > 900 ? 'ÉCLAIR' : points > 700 ? 'RAPIDE' : points > 500 ? 'OK' : correct ? 'LENT' : null;
+    const speedEmoji = points > 900 ? '⚡' : points > 700 ? '🚀' : points > 500 ? '👍' : correct ? '🐢' : null;
+    const speedBar = correct ? Math.round(((points - 500) / 500) * 100) : 0; // 0-100
 
     return (
-      <div
-        className="screen"
-        style={{
-          background: correct
-            ? 'linear-gradient(135deg, #16a34a, #22c55e)'
-            : 'linear-gradient(135deg, #dc2626, #ef4444)',
-          minHeight: '100vh',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '24px',
-          animation: 'fadeIn 0.3s ease',
-        }}
-      >
+      <div className="screen" style={{
+        background: correct ? 'linear-gradient(135deg, #16a34a, #22c55e)' : 'linear-gradient(135deg, #dc2626, #ef4444)',
+        minHeight: '100vh', alignItems: 'center', justifyContent: 'center', padding: '24px',
+        animation: 'fadeIn 0.3s ease',
+      }}>
         <div style={{ textAlign: 'center', color: 'white', maxWidth: 380, width: '100%' }}>
-          <div style={{ fontSize: '4rem', marginBottom: 12, animation: 'pop 0.4s ease' }}>
+          <div style={{ fontSize: '4rem', marginBottom: 8, animation: 'pop 0.4s ease' }}>
             {correct ? '🎉' : '😬'}
           </div>
-          <h2 style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: '2rem',
-            marginBottom: 8,
-          }}>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', marginBottom: 12 }}>
             {correct ? 'Bonne réponse !' : 'Mauvaise réponse'}
           </h2>
 
           {correct ? (
-            <div style={{
-              background: 'rgba(255,255,255,0.2)',
-              borderRadius: 12, padding: '12px 20px',
-              marginBottom: 16, fontWeight: 900, fontSize: '1.3rem',
-            }}>
-              +{points} points ⭐
+            <div style={{ marginBottom: 12 }}>
+              {/* Points earned */}
+              <div style={{ background: 'rgba(0,0,0,0.2)', borderRadius: 14, padding: '16px 20px', marginBottom: 10 }}>
+                <div style={{ fontSize: '2.5rem', fontWeight: 900, lineHeight: 1 }}>+{points}</div>
+                <div style={{ fontSize: '0.85rem', opacity: 0.85, fontWeight: 700 }}>points gagnés</div>
+              </div>
+
+              {/* Speed bar */}
+              <div style={{ background: 'rgba(0,0,0,0.15)', borderRadius: 12, padding: '12px 16px', marginBottom: 10 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6, fontSize: '0.8rem', fontWeight: 700, opacity: 0.85 }}>
+                  <span>{speedEmoji} Vitesse : {speedRatio}</span>
+                  <span>+{Math.round(points - 500)} bonus</span>
+                </div>
+                <div style={{ height: 8, background: 'rgba(255,255,255,0.2)', borderRadius: 999, overflow: 'hidden' }}>
+                  <div style={{
+                    height: '100%', width: `${speedBar}%`, borderRadius: 999,
+                    background: 'rgba(255,255,255,0.9)',
+                    animation: 'growBar 0.8s ease',
+                  }} />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4, fontSize: '0.7rem', opacity: 0.6 }}>
+                  <span>500 pts (lent)</span>
+                  <span>1000 pts (instant)</span>
+                </div>
+              </div>
             </div>
           ) : (
-            <div style={{
-              background: 'rgba(0,0,0,0.2)',
-              borderRadius: 12, padding: '12px 20px',
-              marginBottom: 16, fontWeight: 700, fontSize: '0.9rem',
-            }}>
+            <div style={{ background: 'rgba(0,0,0,0.2)', borderRadius: 12, padding: '14px 20px', marginBottom: 12, fontSize: '0.9rem', fontWeight: 700 }}>
               La bonne réponse était :<br />
               <span style={{ fontWeight: 900, fontSize: '1.1rem' }}>
-                {OPTION_LABELS[correctAnswer]} — {question?.options[correctAnswer]}
+                {['A','B','C','D'][correctAnswer]} — {question?.options[correctAnswer]}
               </span>
             </div>
           )}
 
-          <div style={{
-            background: 'rgba(255,255,255,0.15)',
-            borderRadius: 12, padding: '12px 20px',
-          }}>
+          <div style={{ background: 'rgba(255,255,255,0.15)', borderRadius: 12, padding: '12px 20px' }}>
             <p style={{ opacity: 0.8, fontSize: '0.85rem', marginBottom: 2 }}>Score total</p>
-            <p style={{ fontWeight: 900, fontSize: '1.5rem' }}>⭐ {totalScore} pts</p>
+            <p style={{ fontWeight: 900, fontSize: '1.6rem', margin: 0 }}>⭐ {totalScore} pts</p>
           </div>
 
-          <p style={{ marginTop: 20, opacity: 0.6, fontSize: '0.85rem', fontWeight: 600 }}>
+          <p style={{ marginTop: 16, opacity: 0.6, fontSize: '0.82rem', fontWeight: 600 }}>
             En attente du classement...
             <span style={{ display: 'inline-flex', gap: 4, marginLeft: 8 }}>
               <span className="dot" style={{ background: 'rgba(255,255,255,0.7)' }} />
@@ -487,6 +492,10 @@ export default function PlayerView({ onBack }) {
             </span>
           </p>
         </div>
+
+        <style>{`
+          @keyframes growBar { from { width: 0; } to { width: ${speedBar}%; } }
+        `}</style>
       </div>
     );
   }
