@@ -27,8 +27,6 @@
         },
 
         "players": {
-          ".validate": "newData.numChildren() <= 50",
-
           "$playerId": {
             ".validate": "newData.hasChildren(['name', 'score', 'joinedAt'])",
 
