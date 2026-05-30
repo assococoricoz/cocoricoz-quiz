@@ -35,11 +35,50 @@ export function sanitizeName(name) {
   return name.trim().slice(0, MAX_NAME_LENGTH).replace(/[<>'"&]/g, '');
 }
 
+// ── Questions CRUD ────────────────────────────────────────────
+export async function loadQuizQuestions(type) {
+  const snap = await get(ref(db, `quizData/${type}/questions`));
+  if (!snap.exists()) return null;
+  const data = snap.val();
+  return Object.entries(data)
+    .map(([id, q]) => ({ ...q, _id: id }))
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+}
+
+export async function initializeQuestions(type, questions) {
+  const data = {};
+  questions.forEach((q, i) => {
+    const id = generateId();
+    const { id: _staticId, ...rest } = q;
+    data[id] = { ...rest, order: i };
+  });
+  await set(ref(db, `quizData/${type}/questions`), data);
+}
+
+export async function addQuestion(type, questionData) {
+  const id = generateId();
+  const snap = await get(ref(db, `quizData/${type}/questions`));
+  const count = snap.exists() ? Object.keys(snap.val()).length : 0;
+  await set(ref(db, `quizData/${type}/questions/${id}`), {
+    ...questionData,
+    order: count,
+  });
+  return id;
+}
+
+export async function updateQuestion(type, id, questionData) {
+  await update(ref(db, `quizData/${type}/questions/${id}`), questionData);
+}
+
+export async function deleteQuestion(type, id) {
+  await set(ref(db, `quizData/${type}/questions/${id}`), null);
+}
+
 // ── Session ───────────────────────────────────────────────────
-export async function createSession(code, hostId) {
+export async function createSession(code, hostId, quizType = 'franco') {
   await set(ref(db, `sessions/${code}`), {
     status: 'lobby', currentQuestion: -1, questionStartTime: 0,
-    hostId, createdAt: Date.now(),
+    hostId, createdAt: Date.now(), quizType,
   });
 }
 
@@ -64,6 +103,8 @@ export async function joinSession(code, playerId, name) {
   await set(ref(db, `sessions/${code}/players/${playerId}`), {
     name: safeName, score: 0, joinedAt: Date.now(),
   });
+
+  return session; // Return session data so caller knows quizType
 }
 
 // ── Host controls ─────────────────────────────────────────────

@@ -1,5 +1,19 @@
 {
   "rules": {
+    "quizData": {
+      "$type": {
+        ".read": true,
+        ".write": true,
+        "questions": {
+          "$id": {
+            ".validate": "newData.hasChildren(['question', 'options', 'correct', 'category'])",
+            "question":  { ".validate": "newData.isString() && newData.val().length >= 3" },
+            "correct":   { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 3" },
+            "category":  { ".validate": "newData.isString() && newData.val().length >= 1" }
+          }
+        }
+      }
+    },
     "sessions": {
       "$code": {
         ".read": true,

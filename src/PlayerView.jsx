@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  generateId, sessionExists, joinSession, listenToSession, submitAnswer
+  generateId, sessionExists, joinSession, listenToSession, submitAnswer, loadQuizQuestions
 } from './firebase.js';
 import { QUESTIONS, QUESTION_TIME } from './questions.js';
+import { QUESTIONS_FR } from './questions_fr.js';
 
 const OPTION_LABELS = ['A', 'B', 'C', 'D'];
 const OPTION_COLORS = ['var(--opt-a)', 'var(--opt-b)', 'var(--opt-c)', 'var(--opt-d)'];
@@ -13,7 +14,8 @@ function calcPoints(timeMs) {
 }
 
 export default function PlayerView({ onBack }) {
-  const [phase, setPhase] = useState('joining'); // joining | lobby | question | answered | reveal | leaderboard | finished
+  const [phase, setPhase] = useState('joining');
+  const [activeQuestions, setActiveQuestions] = useState(QUESTIONS);
   const [name, setName] = useState('');
   const [codeInput, setCodeInput] = useState(() => {
     // Pre-fill code from URL if present (?code=XXXXX)
@@ -61,7 +63,7 @@ export default function PlayerView({ onBack }) {
       // Compute result for this question
       const myPlayerData = session.players?.[playerId.current];
       const myAnswer = myPlayerData?.answers?.[currentQ];
-      const question = QUESTIONS[currentQ];
+      const question = activeQuestions[currentQ];
       if (myAnswer !== undefined) {
         setLastResult({
           correct: myAnswer.correct,
@@ -128,7 +130,13 @@ export default function PlayerView({ onBack }) {
       }
       playerId.current = generateId();
       sessionCode.current = c;
-      await joinSession(c, playerId.current, name.trim());
+      const sessionData = await joinSession(c, playerId.current, name.trim());
+
+      // Load questions from Firebase based on session's quizType
+      const quizType = sessionData?.quizType || 'franco';
+      const qs = await loadQuizQuestions(quizType);
+      if (qs && qs.length > 0) setActiveQuestions(qs);
+
       setLoading(false);
       setPhase('lobby');
     } catch (err) {
@@ -153,7 +161,7 @@ export default function PlayerView({ onBack }) {
     setSelectedAnswer(answerIndex);
     answeredRef.current.add(currentQ);
 
-    const question = QUESTIONS[currentQ];
+    const question = activeQuestions[currentQ];
     const correct = answerIndex === question.correct;
     const timeMs = (QUESTION_TIME - timeLeft) * 1000;
     const points = correct ? calcPoints(timeMs) : 0;
@@ -301,7 +309,7 @@ export default function PlayerView({ onBack }) {
   // --- QUESTION ---
   if ((phase === 'question' || phase === 'answered') && session?.currentQuestion >= 0) {
     const currentQ = session.currentQuestion;
-    const question = QUESTIONS[currentQ];
+    const question = activeQuestions[currentQ];
     const isAnswered = phase === 'answered';
     const timerColor = timeLeft > 10 ? 'var(--green)' : timeLeft > 5 ? 'var(--gold)' : 'var(--red)';
 
@@ -325,7 +333,7 @@ export default function PlayerView({ onBack }) {
               {question.category}
             </p>
             <p style={{ color: 'white', fontWeight: 800, fontSize: '0.9rem' }}>
-              Q{currentQ + 1}/{QUESTIONS.length}
+              Q{currentQ + 1}/{activeQuestions.length}
             </p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -426,7 +434,7 @@ export default function PlayerView({ onBack }) {
   // --- REVEAL ---
   if (phase === 'reveal' && lastResult) {
     const currentQ = session?.currentQuestion ?? 0;
-    const question = QUESTIONS[currentQ];
+    const question = activeQuestions[currentQ];
     const { correct, points, totalScore, correctAnswer } = lastResult;
 
     // Compute speed tier for display
