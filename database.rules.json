@@ -1,0 +1,79 @@
+{
+  "rules": {
+    "sessions": {
+      "$code": {
+        ".read": true,
+
+        ".validate": "$code.matches(/^[A-Z2-9]{5}$/)",
+
+        "status": {
+          ".validate": "newData.val() === 'lobby' || newData.val() === 'question' || newData.val() === 'reveal' || newData.val() === 'leaderboard' || newData.val() === 'finished'"
+        },
+
+        "currentQuestion": {
+          ".validate": "newData.isNumber() && newData.val() >= -1 && newData.val() <= 49"
+        },
+
+        "questionStartTime": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+
+        "createdAt": {
+          ".validate": "newData.isNumber()"
+        },
+
+        "hostId": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+
+        "players": {
+          ".validate": "newData.numChildren() <= 50",
+
+          "$playerId": {
+            ".validate": "newData.hasChildren(['name', 'score', 'joinedAt'])",
+
+            ".write": "!data.exists() && root.child('sessions').child($code).child('status').val() === 'lobby' || data.exists()",
+
+            "name": {
+              ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 20"
+            },
+
+            "score": {
+              ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 75000"
+            },
+
+            "joinedAt": {
+              ".validate": "newData.isNumber()"
+            },
+
+            "answers": {
+              "$qIndex": {
+                ".write": "!data.exists()",
+
+                ".validate": "newData.hasChildren(['answerIndex', 'correct', 'timeMs', 'points'])",
+
+                "answerIndex": {
+                  ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 3"
+                },
+
+                "correct": {
+                  ".validate": "newData.isBoolean()"
+                },
+
+                "timeMs": {
+                  ".validate": "newData.isNumber() && newData.val() >= 0"
+                },
+
+                "points": {
+                  ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1000"
+                }
+              }
+            }
+          }
+        },
+
+        ".write": "!data.exists() || data.child('status').val() !== 'finished'"
+      }
+    }
+  }
+}

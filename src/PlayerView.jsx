@@ -119,17 +119,23 @@ export default function PlayerView({ onBack }) {
     setLoading(true);
     setError('');
     const c = codeInput.trim().toUpperCase();
-    const exists = await sessionExists(c);
-    if (!exists) {
-      setError('Code invalide ou partie terminée.');
+    try {
+      const exists = await sessionExists(c);
+      if (!exists) {
+        setError('Code invalide ou partie terminée.');
+        setLoading(false);
+        return;
+      }
+      playerId.current = generateId();
+      sessionCode.current = c;
+      await joinSession(c, playerId.current, name.trim());
+      setLoading(false);
+      setPhase('lobby');
+    } catch (err) {
+      setError(err.message || 'Erreur de connexion. Réessaie.');
       setLoading(false);
       return;
     }
-    playerId.current = generateId();
-    sessionCode.current = c;
-    await joinSession(c, playerId.current, name.trim());
-    setLoading(false);
-    setPhase('lobby');
 
     // Start listening
     const unsub = listenToSession(c, (data) => {
